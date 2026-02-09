@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 For My Valentine 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .emoji {
+            font-size: 100px;
+            animation: bounce 1s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #e91e63;
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        .no-btn {
+            background: #ddd;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .final-message {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .romantic-text {
+            font-size: 16px;
+            color: #e91e63;
+            font-style: italic;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .emoji {
+                font-size: 80px;
+            }
+            
+            .message {
+                font-size: 16px;
+            }
+            
+            button {
+                padding: 12px 30px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="emoji" id="emoji">😍</div>
+        <h1 id="question">Will you be my Valentine?</h1>
+        <p class="message" id="message">I know we can't be together right now, but you're worth everything to me ❤️</p>
+        
+        <div class="buttons" id="buttons">
+            <button class="yes-btn" onclick="handleYesFake()">Yes! 💕</button>
+            <button class="no-btn" id="noBtn" onclick="handleNo()">No 😢</button>
+        </div>
+
+        <div class="final-message" id="finalMessage">
+            <h1 style="color: #e91e63;">I KNEW IT! 🎉</h1>
+            <p class="romantic-text">
+                Distance means nothing when someone means everything. 
+                Every day apart is just another day closer to being together forever. 
+                You're my person, and I can't wait until we don't have to say goodbye anymore. ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let questionIndex = 0;
+        
+        const questions = [
+            {
+                emoji: "😍",
+                question: "Will you be my Valentine?",
+                message: "I know we can't be together right now, but you're worth everything to me ❤️",
+                fakeYesMessage: "Hehe nice try! But you gotta click 'No' first 😏"
+            },
+            {
+                emoji: "🥺",
+                question: "Are you absolutely sure?",
+                message: "Because I'm pretty sure we're perfect together...",
+                fakeYesMessage: "I know you want to say yes... but humor me, click 'No' again! 🙈"
+            },
+            {
+                emoji: "😭",
+                question: "You don't really want me to buy you a horse, do you?",
+                message: "Because I totally would, torpedo... but please say yes first 🐴",
+                fakeYesMessage: "Wait wait! Before the horse... click 'No' one more time 😅"
+            },
+            {
+                emoji: "🤔",
+                question: "Think about it... who's gonna steal MY hoodies?",
+                message: "You know you love wearing them, orzeszek 👕",
+                fakeYesMessage: "You and my hoodies are made for each other... but click 'No' first! 🤭"
+            },
+            {
+                emoji: "😏",
+                question: "You know I'm your favorite person tho...",
+                message: "Admit it! I make you smile like an idiot",
+                fakeYesMessage: "I see that smile already! But keep clicking 'No' babe 😘"
+            },
+            {
+                emoji: "🙃",
+                question: "Ok but have you SEEN how cute we are together?",
+                message: "We're literally goals and you know it",
+                fakeYesMessage: "Facts! But this game isn't over... click 'No' again 📸"
+            },
+            {
+                emoji: "😤",
+                question: "Fine! I'll just go ask someone else...",
+                message: "JK I'M JUST KIDDING PLEASE COME BACK",
+                fakeYesMessage: "HAHA got you scared! Keep going, click 'No' 😂"
+            },
+            {
+                emoji: "🥹",
+                question: "One more chance?",
+                message: "I promise to be the best Valentine ever. Distance and all ✨",
+                fakeYesMessage: "Okay okay, LAST TIME! Click 'No' one final time... I promise! 💕"
+            }
+        ];
+
+        function handleYesFake() {
+            const q = questions[questionIndex];
+            alert(q.fakeYesMessage);
+        }
+
+        function handleNo() {
+            if (questionIndex < questions.length - 1) {
+                questionIndex++;
+                updateQuestion();
+            } else {
+                // Last question - actually proceed to final message
+                handleYesReal();
+            }
+        }
+
+        function handleYesReal() {
+            createHearts();
+            document.querySelector('.container').innerHTML = `
+                <div class="final-message" style="display: block;">
+                    <div class="emoji" style="font-size: 120px;">🎉💕🎊</div>
+                    <h1 style="color: #e91e63; margin-bottom: 20px;">I KNEW IT!</h1>
+                    <p class="romantic-text">
+                        Distance means nothing when someone means everything. 
+                        Every day apart is just another day closer to being together forever. 
+                        You're my person, and I can't wait until we don't have to say goodbye anymore. ❤️
+                        <br><br>
+                        This wait? It's gonna make everything so much sweeter. 
+                        And when we're finally together, it'll be worth every single second we spent missing each other.
+                        <br><br>
+                        Strasznie cię kocham, torpedo 💕
+                        <br><br>
+                        Happy Valentine's Day, my love ✨
+                    </p>
+                </div>
+            `;
+        }
+
+        function updateQuestion() {
+            const q = questions[questionIndex];
+            document.getElementById('emoji').textContent = q.emoji;
+            document.getElementById('question').textContent = q.question;
+            document.getElementById('message').textContent = q.message;
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
