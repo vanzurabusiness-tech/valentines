@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 For My Valentine 💕</title>
+    <title>💕</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 50%, #FF1493 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,13 +25,13 @@
         }
 
         .container {
-            background: white;
+            background: #FFF0F5;
             border-radius: 30px;
             padding: 40px 30px;
             max-width: 500px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
             position: relative;
         }
 
@@ -57,8 +57,15 @@
         .message {
             font-size: 18px;
             color: #555;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             line-height: 1.6;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
         .buttons {
@@ -96,6 +103,11 @@
             background: #ddd;
             color: #666;
             transition: all 0.2s;
+        }
+
+        .no-btn.tiny {
+            font-size: 10px;
+            padding: 5px 10px;
         }
 
         .hearts {
@@ -144,6 +156,31 @@
             line-height: 1.8;
         }
 
+        .gift-box {
+            margin: 30px 0;
+            font-size: 80px;
+            animation: bounce 1s infinite;
+        }
+
+        .spotify-button {
+            display: inline-block;
+            background: #1DB954;
+            color: white;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.4);
+        }
+
+        .spotify-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(29, 185, 84, 0.6);
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 30px 20px;
@@ -174,10 +211,11 @@
     <div class="container">
         <div class="emoji" id="emoji">😍</div>
         <h1 id="question">Will you be my Valentine?</h1>
-        <p class="message" id="message">I know we can't be together right now, but you're worth everything to me ❤️</p>
+        <p class="message" id="message">Ja wiem that we can't be together right now but you're worth everything to me ❤️</p>
+        <p class="small-text" id="smallText">that's why i made this stupid website for u hihi</p>
         
         <div class="buttons" id="buttons">
-            <button class="yes-btn" onclick="handleYesFake()">Yes! 💕</button>
+            <button class="yes-btn" id="yesBtn" onclick="handleYesFake()">Yes! 💕</button>
             <button class="no-btn" id="noBtn" onclick="handleNo()">No 😢</button>
         </div>
 
@@ -198,65 +236,108 @@
             {
                 emoji: "😍",
                 question: "Will you be my Valentine?",
-                message: "I know we can't be together right now, but you're worth everything to me ❤️",
-                fakeYesMessage: "Hehe nice try! But you gotta click 'No' first 😏"
+                message: "Ja wiem that we can't be together right now but you're worth everything to me ❤️",
+                smallText: "that's why i made this stupid website for u hihi",
+                yesButton: "Yes! 💕",
+                noButton: "No 😢",
+                showYes: true,
+                showNo: true,
+                fakeYesMessage: "hihihaha, you have to click 'no' unfortunately!"
             },
             {
                 emoji: "🥺",
-                question: "Are you absolutely sure?",
-                message: "Because I'm pretty sure we're perfect together...",
-                fakeYesMessage: "I know you want to say yes... but humor me, click 'No' again! 🙈"
+                question: "na pewno nie!? :((((", 
+                message: "there's no one better then us kaja…",
+                smallText: "",
+                yesButton: "I wanna be your valentine",
+                noButton: "No 😢",
+                showYes: true,
+                showNo: false,
+                fakeYesMessage: "sorry ale nie xd"
             },
             {
                 emoji: "😭",
                 question: "You don't really want me to buy you a horse, do you?",
-                message: "Because I totally would, torpedo... but please say yes first 🐴",
-                fakeYesMessage: "Wait wait! Before the horse... click 'No' one more time 😅"
+                message: "a ja tak chciałem kupić ci horsa… and name him torpedo or orzeszek.. jak tam wolisz",
+                smallText: "",
+                yesButton: "chce horsa!!",
+                noButton: "No 😢",
+                showYes: true,
+                showNo: true,
+                fakeYesMessage: "też umiem psychological manipulation even when you're the one studying it😚"
             },
             {
-                emoji: "🤔",
-                question: "Think about it... who's gonna steal MY hoodies?",
-                message: "You know you love wearing them, orzeszek 👕",
-                fakeYesMessage: "You and my hoodies are made for each other... but click 'No' first! 🤭"
-            },
-            {
-                emoji: "😏",
-                question: "You know I'm your favorite person tho...",
-                message: "Admit it! I make you smile like an idiot",
-                fakeYesMessage: "I see that smile already! But keep clicking 'No' babe 😘"
-            },
-            {
-                emoji: "🙃",
-                question: "Ok but have you SEEN how cute we are together?",
-                message: "We're literally goals and you know it",
-                fakeYesMessage: "Facts! But this game isn't over... click 'No' again 📸"
+                emoji: "😔",
+                question: "Nie wiem why you don't want to be my valentine…",
+                message: "serio honey… there's no one better then you and I",
+                smallText: "",
+                yesButton: "I agree",
+                noButton: "No 😢",
+                showYes: true,
+                showNo: true,
+                fakeYesMessage: "yeah, i know but click no one more time :)"
             },
             {
                 emoji: "😤",
-                question: "Fine! I'll just go ask someone else...",
-                message: "JK I'M JUST KIDDING PLEASE COME BACK",
-                fakeYesMessage: "HAHA got you scared! Keep going, click 'No' 😂"
+                question: "KAJA PRZESTAŃ!",
+                message: "i'm the only thing that will help you for your kaszel... and stress, so stop saying no please",
+                smallText: "",
+                yesButton: "I'm trying!!!!",
+                noButton: "No 😢",
+                showYes: true,
+                showNo: true,
+                fakeYesMessage: "to chyba this website i made is broken…"
             },
             {
-                emoji: "🥹",
-                question: "One more chance?",
-                message: "I promise to be the best Valentine ever. Distance and all ✨",
-                fakeYesMessage: "Okay okay, LAST TIME! Click 'No' one final time... I promise! 💕"
+                emoji: "😡",
+                question: "THIS IS YOUR LAST CHANCE... WILL YOU BE MY VALENTINE OR NO!???",
+                message: "",
+                smallText: "",
+                yesButton: "YES!!!!!!",
+                noButton: "no",
+                showYes: true,
+                showNo: true,
+                tinyNo: true,
+                fakeYesMessage: "",
+                noMessage: "answer again and think about it!"
             }
         ];
 
         function handleYesFake() {
             const q = questions[questionIndex];
-            alert(q.fakeYesMessage);
+            
+            // Last question - actually go to final page
+            if (questionIndex === questions.length - 1) {
+                handleYesReal();
+                return;
+            }
+            
+            if (q.fakeYesMessage) {
+                alert(q.fakeYesMessage);
+                
+                // Special case for question 2 - after popup, show only NO button
+                if (questionIndex === 1) {
+                    const yesBtn = document.getElementById('yesBtn');
+                    const noBtn = document.getElementById('noBtn');
+                    yesBtn.style.display = 'none';
+                    noBtn.style.display = 'inline-block';
+                }
+            }
         }
 
         function handleNo() {
+            const q = questions[questionIndex];
+            
+            // Last question has a special no message
+            if (questionIndex === questions.length - 1) {
+                alert(q.noMessage);
+                return;
+            }
+            
+            // Move to next question for all others
             if (questionIndex < questions.length - 1) {
                 questionIndex++;
                 updateQuestion();
-            } else {
-                // Last question - actually proceed to final message
-                handleYesReal();
             }
         }
 
@@ -265,21 +346,37 @@
             document.querySelector('.container').innerHTML = `
                 <div class="final-message" style="display: block;">
                     <div class="emoji" style="font-size: 120px;">🎉💕🎊</div>
-                    <h1 style="color: #e91e63; margin-bottom: 20px;">I KNEW IT!</h1>
+                    <h1 style="color: #e91e63; margin-bottom: 20px;">YAAAAAAY!!!!!</h1>
                     <p class="romantic-text">
-                        Distance means nothing when someone means everything. 
-                        Every day apart is just another day closer to being together forever. 
-                        You're my person, and I can't wait until we don't have to say goodbye anymore. ❤️
+                        jest do dupy now ale this is last valentine that we have to be separated! (i hope co nie) xdd kocham cie najmocniej and i cant wait for everything that is in front of us and all the future we have ahead!
                         <br><br>
-                        This wait? It's gonna make everything so much sweeter. 
-                        And when we're finally together, it'll be worth every single second we spent missing each other.
+                        everything will make sense in the end and i will do my best to make it as soon as possible.
                         <br><br>
-                        Strasznie cię kocham, torpedo 💕
+                        you mean the world to me.
                         <br><br>
-                        Happy Valentine's Day, my love ✨
+                        at least go with julka do tego kina.
+                        <br><br>
+                        w barcelonie będzie fajnie hihi, dziękuję jeszcze one more time!
+                        <br><br>
+                        Strasznie cię kocham 💕
                     </p>
+                    <div style="margin: 30px 0;">
+                        <div class="tenor-gif-embed" data-postid="11443008524942720242" data-share-method="host" data-aspect-ratio="1.11111" data-width="100%">
+                            <a href="https://tenor.com/view/cats-cat-with-flower-gif-11443008524942720242">Cats Cat With Flower Meme</a>
+                            from <a href="https://tenor.com/search/cats-memes">Cats Memes</a>
+                        </div>
+                    </div>
+                    <a href="https://open.spotify.com/track/1JSTJqkT5qHq8MDJnJbRE1?si=0e7fc6b2dee34849" target="_blank" class="spotify-button">
+                        🎵 klikni tutaj 🎵
+                    </a>
                 </div>
             `;
+            
+            // Load Tenor script after content is added
+            const script = document.createElement('script');
+            script.src = 'https://tenor.com/embed.js';
+            script.async = true;
+            document.body.appendChild(script);
         }
 
         function updateQuestion() {
@@ -287,6 +384,30 @@
             document.getElementById('emoji').textContent = q.emoji;
             document.getElementById('question').textContent = q.question;
             document.getElementById('message').textContent = q.message;
+            
+            const smallTextEl = document.getElementById('smallText');
+            if (q.smallText) {
+                smallTextEl.textContent = q.smallText;
+                smallTextEl.style.display = 'block';
+            } else {
+                smallTextEl.style.display = 'none';
+            }
+            
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            
+            yesBtn.textContent = q.yesButton;
+            noBtn.textContent = q.noButton;
+            
+            yesBtn.style.display = q.showYes ? 'inline-block' : 'none';
+            noBtn.style.display = q.showNo ? 'inline-block' : 'none';
+            
+            // Make no button tiny on last question
+            if (q.tinyNo) {
+                noBtn.classList.add('tiny');
+            } else {
+                noBtn.classList.remove('tiny');
+            }
         }
 
         function createHearts() {
